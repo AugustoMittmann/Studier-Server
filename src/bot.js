@@ -5,7 +5,7 @@ dotenv.config();
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
 export async function create(content) {
-  /*const message = "Retorne 10 questões sobre " + content + " enumeradas de 1 à 10. Com 5 opções (A, B, C, D e E). Marque a resposta correta.";
+  const message = "Retorne 10 questões sobre " + content + " enumeradas de 1 à 10. Com 5 opções (A, B, C, D e E). Marque a resposta correta.";
 
   const chat = await openai.chat.completions.create({
     messages: [{ 
@@ -18,7 +18,8 @@ export async function create(content) {
   });
 
   const perguntas = chat.choices[0].message.content;
-  console.log(perguntas);*/
+  console.log(perguntas);
+
   const message2 = `1. Qual é a raiz quadrada de 64?
   A) 6
   B) 7
@@ -101,37 +102,37 @@ export async function create(content) {
 
   const questions = [];
 
-  const start1 = message2.indexOf("1.");
-  const end1 = message2.indexOf("2.") - 3;
-  const start2 = message2.indexOf("2.");
-  const end2 = message2.indexOf("3.") - 3;
-  const start3 = message2.indexOf("3.");
-  const end3 = message2.indexOf("4.") - 3;
-  const start4 = message2.indexOf("4.");
-  const end4 = message2.indexOf("5.") - 3;
-  const start5 = message2.indexOf("5.");
-  const end5 = message2.indexOf("6.") - 3;
-  const start6 = message2.indexOf("6.");
-  const end6 = message2.indexOf("7.") - 3;
-  const start7 = message2.indexOf("7.");
-  const end7 = message2.indexOf("8.") - 3;
-  const start8 = message2.indexOf("8.");
-  const end8 = message2.indexOf("9.") - 3;
-  const start9 = message2.indexOf("9.");
-  const end9 = message2.indexOf("10.") - 3;
-  const start10 = message2.indexOf("10.");
-  const end10 = message2.length;
+  const start1 = perguntas.indexOf("1.");
+  const end1 = perguntas.indexOf("2.") - 3;
+  const start2 = perguntas.indexOf("2.");
+  const end2 = perguntas.indexOf("3.") - 3;
+  const start3 = perguntas.indexOf("3.");
+  const end3 = perguntas.indexOf("4.") - 3;
+  const start4 = perguntas.indexOf("4.");
+  const end4 = perguntas.indexOf("5.") - 3;
+  const start5 = perguntas.indexOf("5.");
+  const end5 = perguntas.indexOf("6.") - 3;
+  const start6 = perguntas.indexOf("6.");
+  const end6 = perguntas.indexOf("7.") - 3;
+  const start7 = perguntas.indexOf("7.");
+  const end7 = perguntas.indexOf("8.") - 3;
+  const start8 = perguntas.indexOf("8.");
+  const end8 = perguntas.indexOf("9.") - 3;
+  const start9 = perguntas.indexOf("9.");
+  const end9 = perguntas.indexOf("10.") - 3;
+  const start10 = perguntas.indexOf("10.");
+  const end10 = perguntas.length;
 
-  questions.push(message2.slice(start1, end1));
-  questions.push(message2.slice(start2, end2));
-  questions.push(message2.slice(start3, end3));
-  questions.push(message2.slice(start4, end4));
-  questions.push(message2.slice(start5, end5));
-  questions.push(message2.slice(start6, end6));
-  questions.push(message2.slice(start7, end7));
-  questions.push(message2.slice(start8, end8));
-  questions.push(message2.slice(start9, end9));
-  questions.push(message2.slice(start10, end10));
+  questions.push(perguntas.slice(start1, end1));
+  questions.push(perguntas.slice(start2, end2));
+  questions.push(perguntas.slice(start3, end3));
+  questions.push(perguntas.slice(start4, end4));
+  questions.push(perguntas.slice(start5, end5));
+  questions.push(perguntas.slice(start6, end6));
+  questions.push(perguntas.slice(start7, end7));
+  questions.push(perguntas.slice(start8, end8));
+  questions.push(perguntas.slice(start9, end9));
+  questions.push(perguntas.slice(start10, end10));
 
   const finalObj = [];
 
@@ -145,7 +146,7 @@ export async function create(content) {
     const alternativeCIndex = question.indexOf("C)");
     const alternativeDIndex = question.indexOf("D)");
     const alternativeEIndex = question.indexOf("E)");
-    const alternativeA = question.slice(endQuestionIndex + 6, alternativeBIndex - 1);
+    const alternativeA = question.slice(endQuestionIndex + 5, alternativeBIndex - 1);
     const alternativeB = question.slice(alternativeBIndex + 3, alternativeCIndex - 1);
     const alternativeC = question.slice(alternativeCIndex + 3, alternativeDIndex - 1);
     const alternativeD = question.slice(alternativeDIndex + 3, alternativeEIndex - 1);
