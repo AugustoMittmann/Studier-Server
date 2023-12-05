@@ -16,20 +16,44 @@ app.get('/users', async (req, res) => {
 
 app.get('/create', async (req, res) => {
   try {
-    await prisma.user.create({
+    const user = await prisma.user.findFirst({
+      where: {
+        name: req.query.name
+      }
+    })
+    if(user === "" || user != req.query.name) {
+      await prisma.user.create({
       data: {
         name: req.query.name,
         password: req.query.password
       }
     })
+    return res.status(201).send()
+  } else {
+    return res.send(false)
+  }
   } catch (e) {
     console.log(e);
   }
 
-  return res.status(201).send()
+  
 })
 
-app.get('/test', async (req, res) => {
+app.get('/login', async (req, res) => {
+  try {
+    const user = await prisma.user.findFirst({
+      where: {
+        name: req.query.name,
+        password: req.query.password
+      }
+    })
+    res.send(user);
+  } catch (e) {
+    console.log(e);
+  }
+})
+
+app.get('/question', async (req, res) => {
   try {
     const data = await create(req.query.content);
     res.send(data);
