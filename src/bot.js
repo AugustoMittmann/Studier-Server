@@ -145,7 +145,7 @@ export async function create(content) {
     const alternativeCIndex = question.indexOf("C)");
     const alternativeDIndex = question.indexOf("D)");
     const alternativeEIndex = question.indexOf("E)");
-    const alternativeA = question.slice(endQuestionIndex + 5, alternativeBIndex - 1);
+    const alternativeA = question.slice(endQuestionIndex + 6, alternativeBIndex - 1);
     const alternativeB = question.slice(alternativeBIndex + 3, alternativeCIndex - 1);
     const alternativeC = question.slice(alternativeCIndex + 3, alternativeDIndex - 1);
     const alternativeD = question.slice(alternativeDIndex + 3, alternativeEIndex - 1);
