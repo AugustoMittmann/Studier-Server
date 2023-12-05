@@ -1,40 +1,38 @@
 import express from "express";
 import { create } from "./bot.js";
-import mysql from "mysql"
-
-const database = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: '',
-  database: 'STUDIER'
-})
+import { PrismaClient } from "@prisma/client";
 
 const app = express();
 
-app.get('/insert', async (req, res) => {
-  database.query('SELECT * FROM USERS', (err, result) => {
-    console.log('err:', err);
-    console.log('result:', result);
-    res.send(result);
-  })
+const prisma = new PrismaClient();
+
+app.get('/users', async (req, res) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "GET");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+  const users = await prisma.user.findMany();
+  res.send(users)
 })
 
-app.get('/', async (req, res) => {
+app.post('/create', async (req, res) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT");
+  res.setHeader("Access-Control-Allow-Methods", "POST");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+  const {name, password} = req.body;
 
-  try {
-    res.send('Hello!');
-  } catch (e) {
-    console.log(e);
-  }
+  await prisma.user.create({
+    data: {
+      name: 'name',
+      password: 'password'
+    }
+  })
+
+  return res.status(201).send()
 })
 
 app.get('/test', async (req, res) => {
-  console.log(req.query.content)
   res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT");
+  res.setHeader("Access-Control-Allow-Methods", "GET");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
   try {
     const data = await create(req.query.content);
