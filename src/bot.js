@@ -7,7 +7,7 @@ const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 export async function create(content) {
   const message = "Retorne 10 questões sobre " + content + " enumeradas de 1 à 10. Com 5 opções (A, B, C, D e E). Marque a resposta correta.";
 
-  const chat = await openai.chat.completions.create({
+  /*const chat = await openai.chat.completions.create({
     messages: [{ 
       role: "system", 
       content: message 
@@ -18,121 +18,122 @@ export async function create(content) {
   });
 
   const perguntas = chat.choices[0].message.content;
-  console.log(perguntas);
+  console.log(perguntas);*/
 
-  const message2 = `1. Qual é a raiz quadrada de 64?
-  A) 6
-  B) 7
-  C) 8
-  D) 10
-  E) 12
-  Resposta correta: C
-  
-  2. Se você tem 20 maçãs e come 15, quantas maçãs você tem agora?
-  A) 5
-  B) 10
-  C) 15
-  D) 20
-  E) 25
+  const message2 = `1. Qual é o nome do elemento químico com o símbolo "Na"?
+ A) Níquel
+  B) Neônio
+  C) Nitrogênio
+  D) Sódio
+  E) Náilon
   Resposta correta: A
   
-  3. Qual é o resultado de 7x7?
-  A) 49
-  B) 50
-  C) 51
-  D) 52
-  E) 53
+  2. Qual é a fórmula química da água?
+ A) H2O
+  B) CO2
+  C) O2
+  D) H2O2
+  E) NaCl
   Resposta correta: A
   
-  4. Qual é o resultado de 10-3?
-  A) 5
-  B) 6
-  C) 7
-  D) 8
-  E) 9
-  Resposta correta: C
+  3. Qual é o número atômico do hidrogênio?
+ A) 1
+  B) 2
+  C) 3
+  D) 4
+  E) 5
+  Resposta correta: A
   
-  5. Qual é o resultado de 2x2x2?
-  A) 4
-  B) 6
-  C) 8
-  D) 10
-  E) 12
-  Resposta correta: C
+  4. Qual é a fórmula química do sal de cozinha?
+ A) NaCl
+  B) KCl
+  C) CaCl2
+  D) MgCl2
+  E) FeCl3
+  Resposta correta: A
   
-  6. Qual é o resultado de 100/10?
-  A) 5
-  B) 10
-  C) 15
-  D) 20
-  E) 25
-  Resposta correta: B
+  5. Qual é o nome do processo de transformação de um gás em líquido?
+ A) Evaporação
+  B) Condensação
+  C) Sublimação
+  D) Fusão
+  E) Solidificação
+  Resposta correta: A
   
-  7. Qual é o resultado de 5x5?
-  A) 10
-  B) 15
-  C) 20
-  D) 25
-  E) 30
-  Resposta correta: D
+  6. Qual é o nome do elemento químico com o símbolo "O"?
+ A) Oxigênio
+  B) Osmio
+  C) Ósmio
+  D) Óleo
+  E) Ouro
+  Resposta correta: A
   
-  8. Qual é o resultado de 9+9?
-  A) 16
-  B) 17
-  C) 18
-  D) 19
-  E) 20
-  Resposta correta: C
+  7. Qual é a fórmula química do dióxido de carbono?
+ A) CO
+  B) CO2
+  C) C2O
+  D) C2O2
+  E) C3O2
+  Resposta correta: A
   
-  9. Qual é o resultado de 12-4?
-  A) 6
-  B) 7
-  C) 8
-  D) 9
-  E) 10
-  Resposta correta: C
+  8. Qual é o nome do processo de transformação de um sólido diretamente em gás?
+ A) Evaporação
+  B) Condensação
+  C) Sublimação
+  D) Fusão
+  E) Solidificação
+  Resposta correta: A
   
-  10. Qual é o resultado de 3x3?
-  A) 6
-  B) 7
-  C) 8
-  D) 9
-  E) 10
-  Resposta correta: D`;
-
+  9. Qual é o nome do elemento químico com o símbolo "K"?
+ A) Cálcio
+  B) Potássio
+  C) Kriptônio
+  D) Krypton
+  E) Kalium
+  Resposta correta: A
+  
+  10. Qual é a fórmula química do ácido sulfúrico?
+ A) H2SO4
+  B) H2SO3
+  C) HSO4
+  D) H2S
+  E) SO4
+  Resposta correta: A`;
   const questions = [];
 
-  const start1 = perguntas.indexOf("1.");
-  const end1 = perguntas.indexOf("2.") - 3;
-  const start2 = perguntas.indexOf("2.");
-  const end2 = perguntas.indexOf("3.") - 3;
-  const start3 = perguntas.indexOf("3.");
-  const end3 = perguntas.indexOf("4.") - 3;
-  const start4 = perguntas.indexOf("4.");
-  const end4 = perguntas.indexOf("5.") - 3;
-  const start5 = perguntas.indexOf("5.");
-  const end5 = perguntas.indexOf("6.") - 3;
-  const start6 = perguntas.indexOf("6.");
-  const end6 = perguntas.indexOf("7.") - 3;
-  const start7 = perguntas.indexOf("7.");
-  const end7 = perguntas.indexOf("8.") - 3;
-  const start8 = perguntas.indexOf("8.");
-  const end8 = perguntas.indexOf("9.") - 3;
-  const start9 = perguntas.indexOf("9.");
-  const end9 = perguntas.indexOf("10.") - 3;
-  const start10 = perguntas.indexOf("10.");
-  const end10 = perguntas.length;
+  const completeMessage = message2;
 
-  questions.push(perguntas.slice(start1, end1));
-  questions.push(perguntas.slice(start2, end2));
-  questions.push(perguntas.slice(start3, end3));
-  questions.push(perguntas.slice(start4, end4));
-  questions.push(perguntas.slice(start5, end5));
-  questions.push(perguntas.slice(start6, end6));
-  questions.push(perguntas.slice(start7, end7));
-  questions.push(perguntas.slice(start8, end8));
-  questions.push(perguntas.slice(start9, end9));
-  questions.push(perguntas.slice(start10, end10));
+  const start1 = completeMessage.indexOf("1."); //pergunta completa, considerando as perguntas, respostas e resposta certa
+  const end1 = completeMessage.indexOf("2.") - 2;
+  const start2 = completeMessage.indexOf("2.");
+  const end2 = completeMessage.indexOf("3.") - 2;
+  const start3 = completeMessage.indexOf("3.");
+  const end3 = completeMessage.indexOf("4.") - 2;
+  const start4 = completeMessage.indexOf("4.");
+  const end4 = completeMessage.indexOf("5.") - 2;
+  const start5 = completeMessage.indexOf("5.");
+  const end5 = completeMessage.indexOf("6.") - 2;
+  const start6 = completeMessage.indexOf("6.");
+  const end6 = completeMessage.indexOf("7.") - 2;
+  const start7 = completeMessage.indexOf("7.");
+  const end7 = completeMessage.indexOf("8.") - 2;
+  const start8 = completeMessage.indexOf("8.");
+  const end8 = completeMessage.indexOf("9.") - 2;
+  const start9 = completeMessage.indexOf("9.");
+  const end9 = completeMessage.indexOf("10.") - 2;
+  const start10 = completeMessage.indexOf("10.");
+  const end10 = completeMessage.length;
+
+  questions.push(completeMessage.slice(start1, end1));  //apenas a questão, sem as respostas
+  questions.push(completeMessage.slice(start2, end2));
+  questions.push(completeMessage.slice(start3, end3));
+  questions.push(completeMessage.slice(start4, end4));
+  questions.push(completeMessage.slice(start5, end5));
+  questions.push(completeMessage.slice(start6, end6));
+  questions.push(completeMessage.slice(start7, end7));
+  questions.push(completeMessage.slice(start8, end8));
+  questions.push(completeMessage.slice(start9, end9));
+  questions.push(completeMessage.slice(start10, end10));
 
   const finalObj = [];
 
@@ -140,7 +141,7 @@ export async function create(content) {
     const startQuestionIndex = question.indexOf(`${index+1}.`);
     const endQuestionIndex = question.indexOf("?");
     const allQuestion = question.slice(startQuestionIndex, endQuestionIndex + 1);
-    const endAllQuestionIndex = question.indexOf("Resposta") + 19;
+    const endAllQuestionIndex = question.indexOf("Resposta") + 20;
 
     const alternativeBIndex = question.indexOf("B)");
     const alternativeCIndex = question.indexOf("C)");
@@ -150,8 +151,8 @@ export async function create(content) {
     const alternativeB = question.slice(alternativeBIndex + 3, alternativeCIndex - 1);
     const alternativeC = question.slice(alternativeCIndex + 3, alternativeDIndex - 1);
     const alternativeD = question.slice(alternativeDIndex + 3, alternativeEIndex - 1);
-    const alternativeE = question.slice(alternativeEIndex + 3, endAllQuestionIndex - 20);
-    const rightAnswer = question.slice(endAllQuestionIndex - 1, endAllQuestionIndex);
+    const alternativeE = question.slice(alternativeEIndex + 3, endAllQuestionIndex - 21);
+    const rightAnswer = question.slice(endAllQuestionIndex-2, endAllQuestionIndex-1);
 
     finalObj.push({
       'question': allQuestion,
@@ -165,8 +166,6 @@ export async function create(content) {
      'rightAnswer': rightAnswer
     });
   })
-
-  //console.log(finalObj);
 
   return finalObj;
 }

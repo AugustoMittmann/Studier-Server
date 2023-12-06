@@ -21,22 +21,22 @@ app.get('/create', async (req, res) => {
         name: req.query.name
       }
     })
-    if(user === "" || user != req.query.name) {
-      await prisma.user.create({
-      data: {
-        name: req.query.name,
-        password: req.query.password
+    if(user === null) {
+      if(user != req.query.name) {
+          const createdUser = await prisma.user.create({
+          data: {
+            name: req.query.name,
+            password: req.query.password
+          }
+        })
+        return res.status(201).send(createdUser)
       }
-    })
-    return res.status(201).send()
   } else {
     return res.send(false)
   }
   } catch (e) {
     console.log(e);
   }
-
-  
 })
 
 app.get('/login', async (req, res) => {
@@ -56,6 +56,7 @@ app.get('/login', async (req, res) => {
 app.get('/question', async (req, res) => {
   try {
     const data = await create(req.query.content);
+    console.log(data);
     res.send(data);
   } catch (e) {
     console.log(e);
