@@ -14,7 +14,7 @@ model User {
   id       String    @id @default(cuid())
   name     String
   password String
-  History  History[]
+  history  History[]
 }
 
 model History {
@@ -23,6 +23,7 @@ model History {
   rightAnswers RightAnswers[]
   userAnswers  UserAnswers[]
   finalGrade   Int
+  content      String
   User         User?          @relation(fields: [userId], references: [id])
   userId       String?
 }
