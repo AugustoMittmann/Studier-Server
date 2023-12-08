@@ -68,7 +68,6 @@ app.get('/saveHistory', async (req, res) => {
     let questions = [];
     let rightAnswers = [];
     let userAnswers = [];
-    //console.log(req.query)
     req.query.history.forEach(data => {
       questions.push(data.question ? data.question : "");
       rightAnswers.push(data.rightAnswer ? data.rightAnswer : "");
@@ -79,6 +78,7 @@ app.get('/saveHistory', async (req, res) => {
       data: {
         userId,
         finalGrade: parseInt(req.query.finalGrade),
+        content: req.query.content
       }
     })
     const questionsDB = await prisma.questions.create({
@@ -141,7 +141,7 @@ app.get('/showHistory', async (req, res) => {
 
   const getQuestion = await prisma.questions.findMany({
     where: {
-      historyId: { in: id }
+      historyId: { in: id },
     }
   })
   const getUserAnswer = await prisma.userAnswers.findMany({
@@ -161,10 +161,23 @@ app.get('/showHistory', async (req, res) => {
       getUserAnswer: getUserAnswer[i],
       getRightAnswer: getRightAnswer[i],
       finalGrade: historyDB[i].finalGrade,
+      content: historyDB[i].content
     })
   }
-
   res.send(result)
+})
+
+app.get('/deleteHistory', async (req, res) => {
+  try {
+    await prisma.history.delete({
+      where: {
+        id: req.query.id
+      }
+    })
+    res.send(200)
+  } catch {
+    res.send(400)
+  }
 })
 
 app.listen(4000);

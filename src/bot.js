@@ -7,7 +7,7 @@ const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 export async function create(content) {
   const message = "Retorne 10 questões sobre " + content + " enumeradas de 1 à 10. Com 5 opções (A, B, C, D e E). Marque a resposta correta.";
 
-  /*const chat = await openai.chat.completions.create({
+  const chat = await openai.chat.completions.create({
     messages: [{ 
       role: "system", 
       content: message 
@@ -18,7 +18,6 @@ export async function create(content) {
   });
 
   const perguntas = chat.choices[0].message.content;
-  console.log(perguntas);*/
 
   const message2 = `1. Qual é o nome do elemento químico com o símbolo "Na"?
  A) Níquel
@@ -101,7 +100,7 @@ export async function create(content) {
   Resposta correta: A`;
   const questions = [];
 
-  const completeMessage = message2;
+  const completeMessage = perguntas;
 
   const start1 = completeMessage.indexOf("1."); //pergunta completa, considerando as perguntas, respostas e resposta certa
   const end1 = completeMessage.indexOf("2.") - 2;
