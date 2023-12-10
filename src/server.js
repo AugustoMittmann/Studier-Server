@@ -56,7 +56,7 @@ app.get('/login', async (req, res) => {
 app.get('/question', async (req, res) => {
   try {
     const data = await create(req.query.content);
-    console.log(data);
+    //console.log(data);
     res.send(data);
   } catch (e) {
     console.log(e);
@@ -155,14 +155,21 @@ app.get('/showHistory', async (req, res) => {
     }
   })
   const result = []
-  for(let i = 0; i< getQuestion.length; i++) {
-    result.push({
-      getQuestion: getQuestion[i],
-      getUserAnswer: getUserAnswer[i],
-      getRightAnswer: getRightAnswer[i],
-      finalGrade: historyDB[i].finalGrade,
-      content: historyDB[i].content
-    })
+
+  for(let x = 0; x < getQuestion.length; x++) {
+    for(let y = 0; y < getUserAnswer.length; y++) {
+      for(let z = 0; z < getRightAnswer.length; z++) {
+        if(getQuestion[x].historyId === getUserAnswer[y].historyId && getUserAnswer[y].historyId === getRightAnswer[z].historyId) {
+          result.push({
+            getQuestion: getQuestion[x],
+            getUserAnswer: getUserAnswer[y],
+            getRightAnswer: getRightAnswer[z],
+            finalGrade: historyDB[x].finalGrade,
+            content: historyDB[x].content
+          })
+        }
+      }
+    }
   }
   res.send(result)
 })
@@ -174,13 +181,13 @@ app.get('/deleteHistory', async (req, res) => {
         id: req.query.id
       }
     })
-    res.send(200)
+    res.sendStatus(200)
   } catch {
     res.send(400)
   }
 })
 
 app.get('/connectServer', async (req, res) => {
-    res.send(200)
+    res.sendStatus(200)
 })
 app.listen(4000);
