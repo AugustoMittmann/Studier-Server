@@ -180,4 +180,7 @@ app.get('/deleteHistory', async (req, res) => {
   }
 })
 
+app.get('/connectServer', async (req, res) => {
+    res.send(200)
+})
 app.listen(4000);
